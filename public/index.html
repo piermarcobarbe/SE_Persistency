@@ -16,6 +16,7 @@
   <h3>Create new user</h3>
   <form action="/users" method="post">
     username: <input type="text" name="username"><br>
+    address: <input type="text" name="address"><br>
     <input type="submit" value="Submit">
   </form>
 
@@ -25,6 +26,16 @@
     BF name: <input type="text" name="BF"><br>
     <input type="submit" value="Submit">
   </form>
+
+  <h3>Delete user BF</h3>
+  <form>
+    username: <input type="text" name="username" id="user"><br>
+    <input type="button" value="Submit" onclick=deleteUser(this)>
+  </form>
+
+  <h3>Find User</h3>
+  <input type="text" name="username" id="search_text">
+
 
 </body>
 

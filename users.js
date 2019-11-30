@@ -13,12 +13,13 @@ module.exports = function (db) {
 
     users.getUser = getUser;
 
-    async function insert_user(u) {
+    async function insert_user(u, address) {
 
         res = await users.usersCollection.insertOne(
             {
                 "username" : u,
-                "BF" : ""
+                "BF" : "",
+                "address": address
             });
         if(res.ops[0]) return res.ops[0];
         return null;
@@ -43,7 +44,27 @@ module.exports = function (db) {
         return users.usersCollection.find().toArray();
     }
 
-    users.get_users = get_users
+    users.get_users = get_users;
+
+    async function delete_user(user) {
+        return users.usersCollection.findOneAndDelete({"username" : user});
+    }
+
+    users.delete_user = delete_user;
+
+
+    async function find_user(param){
+        var r = await users.usersCollection.find({}).toArray();
+        var ret_users = []
+        r.forEach(u => {
+            if(u.username.includes(param) || u.address.includes(param)) ret_users.push(u)
+        })
+
+        return ret_users;
+
+    }
+
+    users.find_user = find_user;
 
     return users;
 };
