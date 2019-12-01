@@ -55,10 +55,10 @@ module.exports = function (db) {
 
     async function find_user(param){
         var r = await users.usersCollection.find({}).toArray();
-        var ret_users = []
+        var ret_users = [];
         r.forEach(u => {
             if(u.username.includes(param) || u.address.includes(param)) ret_users.push(u)
-        })
+        });
 
         return ret_users;
 
